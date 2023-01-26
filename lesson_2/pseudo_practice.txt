@@ -1,0 +1,166 @@
+# Casual and formal pseudocode practice
+
+# 1. a method that returns the sum of two integers
+
+-- Casual --
+Given two integers:
+- compute the sum of the two integers
+- save the sum into a sum variable
+
+Return the sum variable
+
+-- Formal --
+START
+
+# Given two integers "num1" and "num2"
+
+SET sum = num1 + num2
+
+PRINT sum
+
+END
+
+
+# 2. a method that takes an array of strings, and returns a string that is all those strings concatenated together
+
+-- Casual --
+Given an array of strings:
+- Initialize result variable with an empty string
+- Iterate through the array of strings
+- For each iteration, append the current string to the result string
+
+Return the result string
+
+-- Formal --
+START
+
+# Given an array of strings called "strings"
+
+SET iterator = 0
+SET result = ''
+
+WHILE iterator < size of strings
+  result = result + string at index "iterator" of "strings"
+  iterator = iterator + 1
+
+PRINT result
+
+END
+
+# 3. a method that takes an array of integers, and returns a new array with every other element 
+#    from the original array, starting with the first element
+
+
+-- Casual --
+Given an array of integers:
+- initialize a result variable as an empty array
+Iterate through the integer array
+- Assuming 0-based indexing:
+  - if index of array element is odd
+    - move to the next array element
+  - otherwise, if index is even
+    - save element to results array
+
+After iterating through the array, return result array
+
+-- Formal --
+START
+
+# Given an array of integers called "integers"
+
+SET result = []
+iterator = 0
+
+WHILE iterator < size of integers
+  IF iterator is odd
+    skip to next iteration
+  ELSE
+    append element of integers at index "iterator" to result
+
+PRINT result
+
+END
+
+# 4. a method that determines the index of the 3rd occurrence of a given character in a string. 
+#    For instance, if the given character is 'x' and the string is 'axbxcdxex', the method should return 6 
+#    (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return nil
+
+
+-- Casual --
+Given a string containing one character and another string
+- split string into individual character strings and store characters in an array
+- iterate over characters array
+  - for each iteration, compare current value with given character string
+  - if the current value is equal to the given character
+    - increment an occurrence variable by 1
+    - if occurrence variable is equal to 3
+      - return current index from method
+    - otherwise, if occurrence variable is less than 3
+      - move to next iteration
+  - otherwise, if current value is not equal to the given character
+    - move to next iteration
+- if entire characters array has been iterated over and occurrence variable never reached 3,
+  - return nil
+
+-- Formal --
+START
+
+# Given a character string called "char" and another string called "str"
+
+SET chars = array of characters of str
+SET iterator = 0
+SET occurences = 0
+
+WHILE iterator < size of chars
+  SET current_char = character string at index "iterator" of chars
+  IF current_char == char
+    occurrences = occurrences + 1
+    IF occurrences == 3
+      PRINT iterator
+    ELSE
+      go to the next iteration
+  ELSE
+    go to the next iteration
+  
+  iterator = iterator + 1
+
+PRINT nil
+
+END
+
+
+# 5. a method that takes two arrays of numbers and returns the result of merging the arrays.
+#    The elements of the first array should become the elements at the even indexes of the returned array, 
+#    while the elements of the second array should become the elements at the odd indexes
+
+
+-- Casual --
+Given two arrays of numbers:
+- initialize empty result array
+- iterate for twice the size of each of the individual given arrays
+- if current iteration is even
+  - append the next value of the first given array
+- otherwise if the current iteration is odd
+  - append the next value of the second given array
+
+Return result array of merged arrays
+
+-- Formal --
+START
+
+# Given two array "arr1" and "arr2"
+
+SET result = []
+SET iterator = 0
+
+WHILE iterator < (size of arr1) * 2
+  IF iterator is even
+    result[iterator] = arr1[iterator / 2]
+  ELSE
+    result[iterator] = arr2[iterator / 2]
+
+  iterator = iterator + 1
+
+PRINT result
+
+END
