@@ -1,0 +1,31 @@
+
+en:
+  welcome: "Welcome to Calculator! Enter your name:"
+  valid_name: "Make sure to use a valid name."
+  greeting: "Hello %{name}!"
+  first_number: "What's the first number?"
+  second_number: "What's the second number?"
+  invalid_number: "Invalid number. Please try again."
+  invalid_operation: "Invalid operation. Please enter 1, 2, 3, or 4."
+  operation_message: "%{operator} the two numbers..."
+  division_by_zero_error: "ERROR: Cannot divide by 0. Please choose a different
+                operation or restart with new numbers."
+  result: "The result is %{result}"
+  again: "Do you want to perform another calculation? (y/n)"
+  again_error: "Invalid answer. Please enter y or n."
+  goodbye: "Thank you for using calculator. Goodbye!"
+
+zh:
+  welcome: "欢迎来到计算机哦! 请问，输入你的名字吧:"
+  valid_name             : "核查名字."
+  greeting: "您好 %{name}!"
+  first_number    : "第一个数字?"
+  second_number   : "第二个数字?"
+  invalid_number  : "不行. 请输入数字."
+  invalid_operation: "不行. 必须选1、2、3还是4."
+  operation_message: "%{operator} the two numbers..."
+  division_by_zero_error : "除以0就不行. 请再试一遍."
+  result: "结果是%{result}"
+  again                  : "要再计算吧? (y/n)"
+  again_error            : "不行. 请输入‘y’还是‘n’"
+  goodbye                   : "多谢来用计算机. 下次见!"

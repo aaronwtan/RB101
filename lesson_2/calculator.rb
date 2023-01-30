@@ -9,11 +9,21 @@
 # perform the operation on the two numbers
 # displays the result
 
-# answer = Kernel.gets()
-# Kernel.puts(answer)
+LANGUAGE = 'en'
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
 
-def prompt(message)
-  Kernel.puts("=> #{message}")
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
+def prompt(key)
+  message = messages(key, LANGUAGE)
+  if message.nil?
+    Kernel.puts("=> #{key}")
+  else
+    Kernel.puts("=> #{message}")
+  end
 end
 
 # original integer validation used
@@ -47,35 +57,35 @@ def operation_to_message(operator)
   message
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt('welcome')
 
 name = ''
 loop do
   name = Kernel.gets().chomp()
   break unless name.empty?()
-  prompt("Make sure to use a valid name.")
+  prompt('valid_name')
 end
 
-prompt("Hi #{name}!")
+puts("=> #{format(messages('greeting', LANGUAGE), name: name)}")
 
 loop do
   number1 = ''
   number2 = ''
 
   loop do
-    prompt("What's the first number?")
+    prompt('first_number')
     number1 = Kernel.gets().chomp()
     break if valid_number?(number1)
-    prompt("Invalid number. Please try again.")
+    prompt('invalid_number')
   end
 
   number1 = number1.to_f
 
   loop do
-    prompt("What's the second number?")
+    prompt('second_number')
     number2 = Kernel.gets().chomp()
     break if valid_number?(number2)
-    prompt("Invalid number. Please try again.")
+    prompt('invalid_number')
   end
 
   number2 = number2.to_f
@@ -95,10 +105,11 @@ loop do
   loop do
     operator = Kernel.gets().chomp()
     break if %w(1 2 3 4).include?(operator)
-    prompt("Invalid operation. Please enter 1, 2, 3, or 4.")
+    prompt('invalid_operation')
   end
 
-  prompt("#{operation_to_message(operator)} the two numbers...")
+  puts("=> #{format(messages('operation_message', LANGUAGE),
+                    operator: operation_to_message(operator))}")
   sleep(1)
 
   result = case operator
@@ -107,26 +118,25 @@ loop do
            when '3' then number1 * number2
            when '4'
              if number2 == 0.0
-               prompt("ERROR: Cannot divide by 0. Please choose a different
-                operation or restart with new numbers.")
+               prompt('division_by_zero_error')
                next
              else
                number1 / number2
              end
            end
 
-  prompt("The result is #{result}")
+  puts("=> #{format(messages('result', LANGUAGE), result: result)}")
 
   answer = ''
 
   loop do
-    prompt("Do you want to perform another calculation? (y/n)")
+    prompt('again')
     answer = Kernel.gets().chomp().downcase()
     break if %w(y yes n no).include?(answer)
-    prompt("Invalid answer. Please enter y or n.")
+    prompt('again_error')
   end
 
   break if %w(n no).include?(answer)
 end
 
-prompt("Thank you for using calculator. Goodbye!")
+prompt('goodbye')
