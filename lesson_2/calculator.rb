@@ -31,7 +31,7 @@ end
 # refactored number validation to included floats
 
 def valid_number?(num)
-  num =~ /^ *[+,-]?\d*\.?\d*([e,E]\d)? *$/ && num =~ /\d/
+  num =~ /^ *[-+]?\d*\.?\d*([e,E]\d)? *$/ && num =~ /\d/
   # first half of statement: matches optional preceding +/- sign,
   # 0+ digits before decimal, optional decimal, 0+ digits after decimal
   # second half verifies there is at least one digits in the input
@@ -69,12 +69,16 @@ loop do
     prompt("Invalid number. Please try again.")
   end
 
+  number1 = number1.to_f
+
   loop do
     prompt("What's the second number?")
     number2 = Kernel.gets().chomp()
     break if valid_number?(number2)
     prompt("Invalid number. Please try again.")
   end
+
+  number2 = number2.to_f
 
   operator_prompt = <<-MSG
     What operation would you like to perform? 
@@ -98,16 +102,16 @@ loop do
   sleep(1)
 
   result = case operator
-           when '1' then number1.to_i() + number2.to_i()
-           when '2' then number1.to_i() - number2.to_i()
-           when '3' then number1.to_i() * number2.to_i()
+           when '1' then number1 + number2
+           when '2' then number1 - number2
+           when '3' then number1 * number2
            when '4'
-             if number2 == '0'
+             if number2 == 0.0
                prompt("ERROR: Cannot divide by 0. Please choose a different
                 operation or restart with new numbers.")
                next
              else
-               number1.to_f() / number2.to_f()
+               number1 / number2
              end
            end
 
