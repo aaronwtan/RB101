@@ -87,7 +87,7 @@ def ask_name
   prompt(messages('ask_name'))
   loop do
     name = gets.chomp
-    return name if !name.empty?
+    return name if !name.strip.empty?
     prompt(messages('invalid_name'))
   end
 end
