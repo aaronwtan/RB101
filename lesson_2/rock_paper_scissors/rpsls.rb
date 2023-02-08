@@ -84,7 +84,8 @@ def display_border(border_message)
 end
 
 def display_choices(player1, player1_choice, player2, player2_choice)
-  prompt("#{player1} chose #{player1_choice}; #{player2} chose #{player2_choice}.")
+  prompt("#{player1} chose #{player1_choice}; "\
+         "#{player2} chose #{player2_choice}.")
   loading
 end
 
@@ -239,7 +240,7 @@ def update_score(player1_choice, player2_choice, score)
   end
 end
 
-def check_grand_winner(player1, player2, score, grand_winner_score)
+def determine_grand_winner(player1, player2, score, grand_winner_score)
   grand_winner = ''
   if score[0] == grand_winner_score
     grand_winner = player1
@@ -297,8 +298,8 @@ loop do
 
     display_results(player1, player1_choice, player2, player2_choice)
     update_score(player1_choice, player2_choice, score)
-    grand_winner = check_grand_winner(player1, player2,
-                                      score, grand_winner_score)
+    grand_winner = determine_grand_winner(player1, player2,
+                                          score, grand_winner_score)
 
     break unless grand_winner.empty?
 
