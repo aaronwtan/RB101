@@ -1,0 +1,20 @@
+welcome: "Welcome to Rock, Paper, Scissors, Lizard, Spock!"
+rules: "The rules are simple: Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard,\n
+        Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard,\n
+        Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock,\n
+        and as it always has, Rock crushes Scissors."
+continue: "Got all that? Enter any key to continue."
+draw: "It's a draw!"
+computer_won: "Bad luck! The computer won and you are the Grand Loser!"
+goodbye: "Thank you for playing Rock, Paper, Scissors, Lizard, Spock. Goodbye!"
+invalid_human_or_computer: "Invalid response. Please type 'human' or 'computer'."
+ask_name: "What is your name, human?"
+invalid_name: "Please enter a valid name."
+computer_name: "Computers aren't humans silly! Please choose a different name."
+grand_winner_score: "Choose how many wins you want to play to (or press enter to play to default 3 wins):"
+invalid_number: "Invalid number. Please enter a positive integer value."
+invalid_choice: "That's not a valid choice."
+scissors_or_spock: "Do you mean scissors or spock ('sc' for scissors and 'sp' for spock)?"
+invalid_scissors_or_spock: "Invalid choice. Please enter scissors or spock (or 'sc' for scissors and 'sp' for spock)."
+play_again: "Do you want to play again?"
+invalid_play_again: "Invalid response. Please type y or n."
