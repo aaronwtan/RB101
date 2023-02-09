@@ -55,7 +55,7 @@ def display_greeting(player, player_number)
   execute_loading
 end
 
-def display_grand_winner_condition(grand_winner_score)
+def display_grand_winner_score(grand_winner_score)
   prompt("First to #{grand_winner_score} wins! Let's get ready to play...")
   execute_loading
 end
@@ -272,7 +272,7 @@ loop do
   update_duplicate_names!(player1, player2)
 
   grand_winner_score = ask_grand_winner_score
-  display_grand_winner_condition(grand_winner_score)
+  display_grand_winner_score(grand_winner_score)
 
   round = 1
   scoreboard = initialize_scoreboard(player1, player2)
