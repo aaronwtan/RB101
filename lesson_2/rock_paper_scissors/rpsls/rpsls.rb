@@ -42,7 +42,7 @@ def display_continue
   gets
 end
 
-def greet_player(player, player_number)
+def display_greeting(player, player_number)
   if player.downcase == 'computer'
     prompt("The computer will play as Player #{player_number}.")
   else
@@ -107,7 +107,7 @@ end
 
 def display_grand_winner(grand_winner)
   if grand_winner.downcase == "computer"
-    display_border('computer_won')
+    display_border(MESSAGES['computer_won'])
   else
     display_border("Congratulations! #{grand_winner} is the Grand Winner!")
   end
@@ -225,14 +225,14 @@ def initialize_game
   [round, score, grand_winner]
 end
 
-def update_duplicate_names(player1, player2)
+def update_duplicate_names!(player1, player2)
   if player1 == player2
     player1 << ' 1'
     player2 << ' 2'
   end
 end
 
-def update_score(player1_choice, player2_choice, score)
+def update_score!(player1_choice, player2_choice, score)
   if player1_wins?(player1_choice, player2_choice)
     score[0] += 1
   elsif player1_wins?(player2_choice, player1_choice)
@@ -240,8 +240,11 @@ def update_score(player1_choice, player2_choice, score)
   end
 end
 
+def grand_winner?(score, grand_winner_score)
+  score.any?( |player_score| player_score == grand_winner_score )
+end
+
 def determine_grand_winner(player1, player2, score, grand_winner_score)
-  grand_winner = ''
   if score[0] == grand_winner_score
     grand_winner = player1
   elsif score[1] == grand_winner_score
@@ -277,12 +280,12 @@ loop do
   display_continue
 
   player1 = ask_player(1)
-  greet_player(player1, 1)
+  display_greeting(player1, 1)
 
   player2 = ask_player(2)
-  greet_player(player2, 2)
+  display_greeting(player2, 2)
 
-  update_duplicate_names(player1, player2)
+  update_duplicate_names!(player1, player2)
 
   grand_winner_score = ask_grand_winner_score
   display_grand_winner_condition(grand_winner_score)
@@ -297,16 +300,16 @@ loop do
     display_choices(player1, player1_choice, player2, player2_choice)
 
     display_results(player1, player1_choice, player2, player2_choice)
-    update_score(player1_choice, player2_choice, score)
-    grand_winner = determine_grand_winner(player1, player2,
-                                          score, grand_winner_score)
+    update_score!(player1_choice, player2_choice, score)
 
-    break unless grand_winner.empty?
+    break if grand_winner?(score, grand_winner_score)
 
     round += 1
   end
 
   display_game_state(player1, player2, round, score)
+  grand_winner = determine_grand_winner(player1, player2,
+                                          score, grand_winner_score)
   display_grand_winner(grand_winner)
 
   break unless play_again?
