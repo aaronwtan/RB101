@@ -42,7 +42,7 @@ def display_continue
   gets
 end
 
-def greet_player(player, player_number)
+def display_greeting(player, player_number)
   if player.downcase == 'computer'
     prompt("The computer will play as Player #{player_number}.")
   else
@@ -216,23 +216,18 @@ def computer_choice
   CHOICES.sample
 end
 
-def initialize_game
-  player1_score = 0
-  player2_score = 0
-  score = [player1_score, player2_score]
-  round = 1
-  grand_winner = ''
-  [round, score, grand_winner]
+def initialize_scoreboard(player1, player2)
+  { player1 => 0, player2 => 0, :round => 1 }
 end
 
-def update_duplicate_names(player1, player2)
+def update_duplicate_names!(player1, player2)
   if player1 == player2
     player1 << ' 1'
     player2 << ' 2'
   end
 end
 
-def update_score(player1_choice, player2_choice, score)
+def update_score!(player1_choice, player2_choice, score)
   if player1_wins?(player1_choice, player2_choice)
     score[0] += 1
   elsif player1_wins?(player2_choice, player1_choice)
@@ -240,14 +235,27 @@ def update_score(player1_choice, player2_choice, score)
   end
 end
 
+def determine_winner(player1, player1_choice, player2, player2_choice)
+  if player1_wins?(player1_choice, player2_choice)
+    player1
+  elsif player1_wins?(player2_choice, player1_choice)
+    player2
+  else
+    'draw'
+  end
+end
+
 def determine_grand_winner(player1, player2, score, grand_winner_score)
-  grand_winner = ''
   if score[0] == grand_winner_score
     grand_winner = player1
   elsif score[1] == grand_winner_score
     grand_winner = player2
   end
   grand_winner
+end
+
+def grand_winner?(score, grand_winner_score)
+  score.any? { |player_score| player_score == grand_winner_score }
 end
 
 def valid_number?(number_str)
@@ -277,17 +285,17 @@ loop do
   display_continue
 
   player1 = ask_player(1)
-  greet_player(player1, 1)
+  display_greeting(player1, 1)
 
   player2 = ask_player(2)
-  greet_player(player2, 2)
+  display_greeting(player2, 2)
 
-  update_duplicate_names(player1, player2)
+  update_duplicate_names!(player1, player2)
 
   grand_winner_score = ask_grand_winner_score
   display_grand_winner_condition(grand_winner_score)
 
-  round, score, grand_winner = initialize_game
+  scoreboard = initialize_scoreboard(player1, player2)
 
   loop do
     display_game_state(player1, player2, round, score)
@@ -296,12 +304,14 @@ loop do
     player2_choice = ask_player_choice(player2)
     display_choices(player1, player1_choice, player2, player2_choice)
 
+    winner = determine_winner(player1, player1_choice, player2, player2_choice)
+
     display_results(player1, player1_choice, player2, player2_choice)
-    update_score(player1_choice, player2_choice, score)
+    update_score!(player1_choice, player2_choice, score)
     grand_winner = determine_grand_winner(player1, player2,
                                           score, grand_winner_score)
 
-    break unless grand_winner.empty?
+    break if grand_winner?(score, grand_winner_score)
 
     round += 1
   end
