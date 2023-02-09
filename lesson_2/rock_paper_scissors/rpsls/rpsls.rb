@@ -241,7 +241,7 @@ def update_score!(player1_choice, player2_choice, score)
 end
 
 def grand_winner?(score, grand_winner_score)
-  score.any?( |player_score| player_score == grand_winner_score )
+  score.any? { |player_score| player_score == grand_winner_score }
 end
 
 def determine_grand_winner(player1, player2, score, grand_winner_score)
