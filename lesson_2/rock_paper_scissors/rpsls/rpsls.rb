@@ -241,7 +241,7 @@ def determine_grand_winner(scoreboard, grand_winner_score)
   scoreboard.key(grand_winner_score)
 end
 
-def grand_winner?(scoreboard, grand_winner_score)
+def any_grand_winner?(scoreboard, grand_winner_score)
   scoreboard.value?(grand_winner_score)
 end
 
@@ -289,7 +289,7 @@ loop do
     display_results(winner)
     update_score!(winner, scoreboard)
 
-    break if grand_winner?(scoreboard, grand_winner_score)
+    break if any_grand_winner?(scoreboard, grand_winner_score)
 
     round += 1
   end
